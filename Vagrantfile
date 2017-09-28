@@ -5,7 +5,9 @@ Vagrant.configure(2) do |config|
   config.vm.box = "ktr/mininet"
   config.vm.network "public_network"
   config.vm.network :forwarded_port, guest: 22, host: rand(2000...4000), id: 'ssh'
-
+  
+  config.ssh.forward_x11 = true
+  config.ssh.forward_agent = true
   config.vm.provider "virtualbox" do |vb|
     vb.customize ["modifyvm", :id, "--vram", "128"]
     vb.memory = "2404"
