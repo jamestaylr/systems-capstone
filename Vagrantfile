@@ -2,15 +2,19 @@
 # vi: set ft=ruby :
 
 Vagrant.configure(2) do |config|
-  config.vm.box = "ktr/mininet"
-  config.vm.network "public_network"
-  config.vm.network :forwarded_port, guest: 22, host: rand(2000...4000), id: 'ssh'
+  for i in 1..3 do
+    config.vm.define "vm#{i}" do |vm1|
+      vm1.vm.box = "ktr/mininet"
+      vm1.vm.network "public_network"
+      vm1.vm.network :forwarded_port, guest: 22, host: rand(2000...4000), id: 'ssh'
   
-  config.ssh.forward_x11 = true
-  config.ssh.forward_agent = true
-  config.vm.provider "virtualbox" do |vb|
-    vb.customize ["modifyvm", :id, "--vram", "128"]
-    vb.memory = "2404"
-    vb.cpus = "2"
+      vm1.ssh.forward_x11 = true
+      vm1.ssh.forward_agent = true
+      vm1.vm.provider "virtualbox" do |vb|
+        vb.customize ["modifyvm", :id, "--vram", "128"]
+        vb.memory = "2404"
+        vb.cpus = "2"
+      end
+    end
   end
 end
