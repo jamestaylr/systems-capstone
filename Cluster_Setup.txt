@@ -1,0 +1,18 @@
+To do once on each machine: 
+	sudo nano /etc/ssh/sshd_config
+		*add the line "Permit Tunnel yes"
+	sudo service ssh restart
+Setup:
+Each machine:
+	cd to mininet/util
+	ifconfig and take note of each eth1 ip address
+	./clustersetup.sh ip1 ip2 
+		this only works if the setup is done on every machine
+		usually has to be done all on three machines simultaneously otherwise it hangs
+
+Main machine: 
+	sudo -E mn --topo tree,3,3 --cluster localip,ip1,ip2
+
+Tear down on each machine:
+	./clustersetup.sh -c ip1 ip2
+		may cause "busy" errors- it has to be done in a certain order, so call the command until all three succeed or are not mounted
