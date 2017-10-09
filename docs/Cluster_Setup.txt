@@ -1,12 +1,14 @@
 To do once on each machine: 
 	sudo nano /etc/ssh/sshd_config
-		*add the line "Permit Tunnel yes"
+		*add the line "PermitTunnel yes"
 	sudo service ssh restart
+	
 Setup:
 Each machine:
 	cd to mininet/util
 	ifconfig and take note of each eth1 ip address
 	./clustersetup.sh ip1 ip2 
+		ip1 and ip2 are the ip addresses of the other two machines
 		this only works if the setup is done on every machine
 		usually has to be done all on three machines simultaneously otherwise it hangs
 
