@@ -4,16 +4,15 @@ Currently, we have 3 boxes. You can see the descriptions here: https://docs.goog
 
 You need to open 3 tabs and ssh into each one. The username is "capstone" and pw is "maxinet" Go ahead and open up 4 total tabs of the first one. 
 
+~~# in one tab on the first machine (your frontend)~~
 
-# in one tab on the first machine (your frontend)
+~~> MaxiNetFrontendServer~~
 
-> MaxiNetFrontendServer
+~~# on the first (different tab), second, and third machines (all workers)~~
 
-# on the first (different tab), second, and third machines (all workers)
+~~> sudo MaxiNetWorker~~
 
-> sudo MaxiNetWorker
-
-You should see that the workers are connecting to the frontend.
+~~You should see that the workers are connecting to the frontend.~~
 
 # on the first machine (different tab): your controller
 
