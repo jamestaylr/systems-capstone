@@ -26,6 +26,15 @@ This starts an OpenFlow controller
 
 This is a good example. In the examples folder, there's plenty of other things. I think dynamicTopologies.py is closest to what we want. You can run that too (all the examples should work already).
 
+If you want to see the GUI of the topologies, I _think_ that this will work (you might have to install gelphi first):
+
+> sudo ~/pox/pox.py forwarding.l2_learning \
+  openflow.discovery misc.gephi_topo \
+  openflow.spanning_tree --no-flood --hold-down \
+  host_tracker info.packet_dump \
+  samples.pretty_log log.level --DEBUG
+
+
 
 # more info
 
