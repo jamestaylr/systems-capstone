@@ -16,7 +16,7 @@ You need to open 3 tabs and ssh into each one. The username is "capstone" and pw
 
 # on the first machine (different tab): your controller
 
-> cd ~/pox/ && python2 pox.py forwarding.l2_learning
+> cd ~/pox/ && python2 pox.py --verbose forwarding.l2_learning
 
 This starts an OpenFlow controller
 
@@ -32,3 +32,4 @@ This is a good example. In the examples folder, there's plenty of other things. 
 * Maxinet github: http://github.com/MaxiNet/MaxiNet/
 * We can get the actual ec2 information, change the number of hosts, etc
 * Essentially these 3 hosts are part of a security group on ec2 where they can comunicate with each other via their internal IPs and the outside world can't get in (besides ssh). 
+* There's a config file in ~/.MaxiNet.cfg
