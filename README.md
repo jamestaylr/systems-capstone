@@ -9,7 +9,6 @@
 6. Take [some sort of industry problem, dr butt mentioned virtualized data centers] and say SDNs are used here, they make things dynamic and make virtualization easier. [also maybe security? Since easier to change policies?]
 This is more of a discussion.
 7. Potentially just show how difficult things are to do manually vs doing by a SDN? Dr butt approaches this by telling us to try different topologies and creating them (vs doing manually?) 
-8. Expand on SDN. Dynamic load balancer? Implement a learning switch? Write a firewall (http://www.cs.columbia.edu/~lierranli/coms6998-8SDNFall2013/homeworks/hw1.pdf)? 
 
 ## Benchmarking
 * http://vlkan.com/blog/post/2013/04/19/benchmarking-mininet/
@@ -19,3 +18,15 @@ This is more of a discussion.
 Jamal suggests looking at OpenStack:
 * several modules (neutron): hack that, work on that
 * mininet is limited functionality-wise; we might pigeonhole ourselves 
+
+Expand on SDN. 
+* Dynamic load balancer? 
+* Implement a learning switch? 
+* Write a firewall (http://www.cs.columbia.edu/~lierranli/coms6998-8SDNFall2013/homeworks/hw1.pdf)? 
+
+## why SDNs?
+* good with big data throughput + connectivity
+* cloud-based traffic (SDN can deliver on-demand
+* managing traffic to IP addresses and VMs (dynamic routing tables!)
+* infra scalable and agile (easy to add devices to the network with SDN)
+* managing security (SDN can easily change the policies)
