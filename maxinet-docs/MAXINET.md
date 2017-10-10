@@ -20,11 +20,6 @@ You need to open 3 tabs and ssh into each one. The username is "capstone" and pw
 
 This starts an OpenFlow controller
 
-# on the first machine (different tab): your program
-
-> /usr/local/share/MaxiNet/examples/simplePing.py
-
-This is a good example. In the examples folder, there's plenty of other things. I think dynamicTopologies.py is closest to what we want. You can run that too (all the examples should work already).
 
 If you want to see the GUI of the topologies, I _think_ that this will work (you might have to install gelphi first):
 
@@ -33,6 +28,12 @@ If you want to see the GUI of the topologies, I _think_ that this will work (you
   openflow.spanning_tree --no-flood --hold-down \
   host_tracker info.packet_dump \
   samples.pretty_log log.level --DEBUG
+
+# on the first machine (different tab): your program
+
+> /usr/local/share/MaxiNet/examples/simplePing.py
+
+This is a good example. In the examples folder, there's plenty of other things. I think dynamicTopologies.py is closest to what we want. You can run that too (all the examples should work already).
 
 
 
