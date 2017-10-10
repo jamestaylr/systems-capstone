@@ -28,7 +28,7 @@ This starts an OpenFlow controller
 This is a good example. In the examples folder, there's plenty of other things. I think dynamicTopologies.py is closest to what we want. You can run that too (all the examples should work already).
 
 
-#more info
+# more info
 
 * Maxinet github: http://github.com/MaxiNet/MaxiNet/
 * We can get the actual ec2 information, change the number of hosts, etc
