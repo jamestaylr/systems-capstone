@@ -26,7 +26,6 @@ fat-tree and VL2 topologies are common ones?
 http://inf.ufrgs.br/~marinho/wp-content/uploads/How-physical-network-topologies-affect-virtual-network-embedding-quality-A-characterization-study-based-on-ISP-and-datacenter-networks.pdf
 - conventional vs. switch-oriented topologies (fat-tree, VL2) 
 - scalability and fault-tolerance? 
-- results: 
->> topologies w more connections --> fewer rejected requests, but higher resource consumption
+- results: topologies w more connections --> fewer rejected requests, but higher resource consumption
 
 ok i couldn't find anything abt specific topologies used in virtudal date centers 
