@@ -12,7 +12,7 @@ https://link.springer.com/content/pdf/10.1007%2F978-3-319-52015-5_35.pdf
 
 SDN generally notes: https://quizlet.com/72153235/software-defined-networking-sdn-flash-cards/
 * pay-as-you-go models
-*network virtualization for multi-tenants => better utilization of resources and faster turnaround times for creating a segregated network
+* network virtualization for multi-tenants => better utilization of resources and faster turnaround times for creating a segregated network
 
 http://searchsdn.techtarget.com/feature/The-application-tier-of-a-software-defined-networking-architecture
 3 tiered architecture:
