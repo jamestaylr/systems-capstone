@@ -13,6 +13,8 @@ vim local.conf
 paste in there:
 
 [[local|localrc]]
+
+HOSTIP=127.0.0.1
 ADMIN_PASSWORD=secret
 
 DATABASE_PASSWORD=$ADMIN_PASSWORD
