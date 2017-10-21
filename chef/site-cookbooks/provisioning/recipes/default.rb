@@ -6,7 +6,6 @@ directory '/etc/chef' do
 end.run_action(:create)
 
 cookbook_file '/etc/chef/openstack_data_bag_secret' do
-  #source "#{File.dirname(__FILE__)}/../../../../../encrypted_data_bag_secret"
   source 'encrypted_data_bag_secret'
   owner 'root'
   group 'root'
