@@ -14,6 +14,8 @@ There are several different local.confs floating around.
 
 It seems like you can use this one:
 
+```
+[[local|localrc]]
 ADMIN_PASSWORD=maxinet
 DATABASE_PASSWORD=maxinet
 RABBIT_PASSWORD=maxinet
@@ -29,7 +31,7 @@ SWIFT_REPLICAS=1
 SWIFT_DATA_DIR=$DEST/data
 
 FLOATING_RANGE=192.168.0.28/30 <<<< change the .28 to something else (bump it up one ex: 29) >>>
-
+```
 
 Or you can use the default local.conf on the devstack website. Both seem to work? 
 
