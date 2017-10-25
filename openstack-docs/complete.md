@@ -50,15 +50,16 @@
        (trust me its fine just do it) 
    
 ## Create stack user for OpenStack and clone DevStack from git 
-  `sudo su - `  
-  `adduser stack`  
-  `echo "stack ALL=(ALL) NOPASSWD: ALL" » /etc/sudoers`  
-  `exit`  
-  `su stack`  
-  `sudo apt-get install git -y`  
-  `git clone https://github.com/openstack-dev/devstack.git`  
-  `cd devstack`  
-  
+  ```
+  sudo su -   
+  adduser stack  
+  echo "stack ALL=(ALL) NOPASSWD: ALL" » /etc/sudoers  
+  exit  
+  su stack  
+  sudo apt-get install git -y  
+  git clone https://github.com/openstack-dev/devstack.git  
+  cd devstack  
+  ```
 ## Copy in local.conf file in your devstack directory
   ```
   [[local|localrc]]
