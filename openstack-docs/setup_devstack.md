@@ -10,18 +10,28 @@ cd devstack/
 
 vim local.conf
 
-paste in there:
+There are several different local.confs floating around.
 
-[[local|localrc]]
+It seems like you can use this one:
 
-HOSTIP=127.0.0.1
-ADMIN_PASSWORD=secret
-
-DATABASE_PASSWORD=$ADMIN_PASSWORD
-
-RABBIT_PASSWORD=$ADMIN_PASSWORD
-
+ADMIN_PASSWORD=maxinet
+DATABASE_PASSWORD=maxinet
+RABBIT_PASSWORD=maxinet
 SERVICE_PASSWORD=$ADMIN_PASSWORD
+
+HOST_IP=[YOUR IP]
+
+LOGFILE=$DEST/logs/stack.sh.log
+LOGDAYS=2
+
+SWIFT_HASH=66a3d6b56c1f479c8b4e70ab5c2000f5
+SWIFT_REPLICAS=1
+SWIFT_DATA_DIR=$DEST/data
+
+FLOATING_RANGE=192.168.0.28/30 <<<< change the .28 to something else (bump it up one ex: 29) >>>
+
+
+Or you can use the default local.conf on the devstack website. Both seem to work? 
 
 
 ## in the prompt
