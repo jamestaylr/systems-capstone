@@ -37,7 +37,13 @@ Or you can use the default local.conf on the devstack website. Both seem to work
 
 
 ## in the prompt
-./stack.sh
+`sudo chown -R stack:stack /opt/stack`
+
+`./stack.sh`
+
+`source openrc` 
+
+then to start the openstack cli: `openstack` !
 
 ## more detail
 
