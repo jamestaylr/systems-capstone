@@ -80,9 +80,14 @@
   ```
 ## Run Stack.sh script
   `sudo chown -R stack:stack /opt/stack`  
+  `sudo apt-get install tmux`
+  `tmux`
   `./stack.sh`  
+  `<ctr-b and then press the ‘d’ key>`  
+  `To get back to your tmux session, type in “tmux attach” wow!`  
   `source openrc`  
   `openstack` (this starts the CLI)
+
 ### More Detail
 -----------------
 -   http://www.rushiagr.com/blog/2014/04/03/openstack-in-an-hour-with-devstack/
