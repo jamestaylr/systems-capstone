@@ -118,10 +118,10 @@ Instead of "somemetadata" choose something relevant to the host aggregate. Ex: h
  for clarification.
 
 
-Like so [controller node]:
+Like so [controller node] (hre, mg_host_agg_5 is our [host-aggregate-name]):
 
 ```
-nova aggregate-set-metadata mg_host_agg_5 somemetadata=true
+nova aggregate-set-metadata [host-aggregate-name] somemetadata=true
 
 Metadata has been successfully updated for aggregate 2.
 +----+---------------+-------------------+-------------+---------------------+--------------------------------------+
