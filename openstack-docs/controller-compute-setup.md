@@ -1,5 +1,9 @@
 # controller & compute nodes
 
+### floating ips
+
+**Update 10/29**: Based on a suggestion by James, we're using 192.168.2.0/24 for our subnet network address. 
+
 ### local.conf for the controller node
 
 ```
@@ -19,7 +23,7 @@ SWIFT_HASH=66a3d6b56c1f479c8b4e70ab5c2000f5
 SWIFT_REPLICAS=1
 SWIFT_DATA_DIR=$DEST/data
 
-FLOATING_RANGE=192.168.0.29/30  #not sure how much this matters
+FLOATING_RANGE=192.168.2.0/24  #not sure how much this matters
 
 FLAT_INTERFACE=enp2s0    #how we connect to internet
 MULTI_HOST=1                      #turn on multi host
@@ -36,7 +40,7 @@ HOST_IP=192.168.0.223                               # CHANGE this per compute no
 FLAT_INTERFACE=enp2s0
 FIXED_RANGE=10.4.128.0/20
 FIXED_NETWORK_SIZE=4096
-FLOATING_RANGE=192.168.0.31/30                      # not sure if you need to change this
+FLOATING_RANGE=192.168.2.0/24                      # not sure if you need to change this
 MULTI_HOST=1
 LOGFILE=/opt/stack/logs/stack.sh.log
 ADMIN_PASSWORD=maxinet
