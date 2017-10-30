@@ -87,97 +87,49 @@ You can verify that you have public floating IPs like so:
 [controller node] openstack floating ip list --network public
 ```
 
-### creating host aggregates
+### creating availability zones
 
-I am utilizing [host aggregates](https://support.metacloud.com/hc/en-us/articles/115007191687-Using-Host-Aggregates-for-More-Flexible-Instance-Management) 
-to actually set this up. 
+Previously, we were using host aggregates to actually assign a VM to one particular host. Please see the [previous version](https://github.com/jamestaylr/systems-capstone/blob/6f8dc2c7567eb93191a490d94bb0f2188cd03041/openstack-docs/controller-compute-setup.md) of this file in order to see the instructions for that. After doing some research - [notes are here](https://docs.google.com/document/u/1/d/1vW7TuM4CfDum1luivbGjrQAwzAkShKEgQGEPJlWfXvQ/edit) - I determined that availability zones are essentially an easier way of doing what we want.
 
-All commands are on the controller node.
+There are still better ways probably, but this will work. 
 
 ```
-nova aggregate-create [host-aggregate-name]
+# nova aggregate-create <aggregate name> <AZ name>
+nova aggregate-create HA1 AZ1
++----+---------+-------------------+-------+------------------------+
+| Id | Name    | Availability Zone | Hosts | Metadata               |
++----+---------+-------------------+-------+------------------------+
+| 4  |   HA1   | AZ1               |       | 'availability_zone=AZ1'|
++----+---------+-------------------+-------+------------------------+
 
-+----+---------------+-------------------+-------+----------+--------------------------------------+
-| Id | Name          | Availability Zone | Hosts | Metadata | UUID                                 |
-+----+---------------+-------------------+-------+----------+--------------------------------------+
-| 2  | mg_host_agg_5 | -                 |       |          | eba12933-7a3c-4660-baed-faff8748e854 |
-+----+---------------+-------------------+-------+----------+--------------------------------------+
-
-nova aggregate-add-host [host-aggregate-name] [compute-node-name]
-
-Host capstone4 has been successfully added for aggregate 2 
-+----+---------------+-------------------+-------------+----------+--------------------------------------+
-| Id | Name          | Availability Zone | Hosts       | Metadata | UUID                                 |
-+----+---------------+-------------------+-------------+----------+--------------------------------------+
-| 2  | mg_host_agg_5 | -                 | 'capstone4' |          | eba12933-7a3c-4660-baed-faff8748e854 |
-+----+---------------+-------------------+-------------+----------+--------------------------------------+
+nova availability-zone-list
+| AZ1               | available                              |
+| |- node-27        |                                        |
+| | |- nova-compute | enabled :-) 2016-11-06T05:13:48.000000 |
++-------------------+----------------------------------------+
 
 ```
 
-You can directly create new instances with the host aggregate if you use availability zones. However, since we're not currently
-using them, we have to sorta fake it by directly saying "create a flavor with this host aggregate." We do this by adding
-in a new metadata feature about the flavors and then associating that feature with a specific host aggregate. 
-
-Instead of "somemetadata" choose something relevant to the host aggregate. Ex: hostaggregate1=true. See [here](https://support.metacloud.com/hc/en-us/articles/115007191687-Using-Host-Aggregates-for-More-Flexible-Instance-Management)
- for clarification.
-
-
-Like so [controller node] (hre, mg_host_agg_5 is our [host-aggregate-name]):
+Now, add a host to the availability zone. Here, HA1 is your aggreagte name and "node-27" is what we're using as our host
+name. Presumably it will be capstone0, capstone2, etc. Add your compute nodes!!
 
 ```
-nova aggregate-set-metadata [host-aggregate-name] somemetadata=true
-
-Metadata has been successfully updated for aggregate 2.
-+----+---------------+-------------------+-------------+---------------------+--------------------------------------+
-| Id | Name          | Availability Zone | Hosts       | Metadata            | UUID                                 |
-+----+---------------+-------------------+-------------+---------------------+--------------------------------------+
-| 2  | mg_host_agg_5 | -                 | 'capstone4' | 'somemetadata=true' | eba12933-7a3c-4660-baed-faff8748e854 |
-+----+---------------+-------------------+-------------+---------------------+--------------------------------------+
-
+nova aggregate-add-host HA1 node-27
+Host node-27 has been successfully added for aggregate 7
++----+------+-------------------+----------+------------------------+
+| Id | Name | Availability Zone | Hosts    | Metadata               |
++----+------+-------------------+----------+------------------------+
+| 7  | HA1  | AZ1               | 'node-27'| 'availability_zone=AZ1'|
++----+------+-------------------+----------+------------------------+
 ```
 
-Now, create that flavor. You can customize it as you wish. This is just a normal flavor creation, nothing new.
+Now, create the instance. It will be automatically added to one of the nodes that's part of our availibility zones. 
 
 ```
-nova flavor-create --is-public true [your-flavor-name] auto 256 20 1
+openstack server create [name-of-instance] --flavor [your-flavor-name]  --image [your-image, probably cirrOS] --nic net-id=public --availability-zone [your-az-name]
 
-+--------------------------------------+-------------+-----------+------+-----------+------+-------+-------------+-----------+
-| ID                                   | Name        | Memory_MB | Disk | Ephemeral | Swap | VCPUs | RXTX_Factor | Is_Public |
-+--------------------------------------+-------------+-----------+------+-----------+------+-------+-------------+-----------+
-| 3a1106cb-dbef-48d7-814c-41111be6192b | m1.flavor_3 | 256       | 20   | 0         |      | 1     | 1.0         | True      |
-+--------------------------------------+-------------+-----------+------+-----------+------+-------+-------------+-----------+
-
-```
-
-Note the flavor ID. Now, add the metadata to the flavor. 
-
-```
-nova flavor-key <FLAVOR ID FROM THE LINE ABOVE> set <WHATEVER YOU CHOSE AS YOUR METADATA=true>
-nova flavor-show <FLAVOR ID FROM THE LINE ABOVE>
-
-+----------------------------+--------------------------------------+
-| Property                   | Value                                |
-+----------------------------+--------------------------------------+
-| OS-FLV-DISABLED:disabled   | False                                |
-| OS-FLV-EXT-DATA:ephemeral  | 0                                    |
-| disk                       | 20                                   |
-| extra_specs                | {"somemetadata": "true"}             |
-| id                         | 3a1106cb-dbef-48d7-814c-41111be6192b |
-| name                       | m1.flavor_3                          |
-| os-flavor-access:is_public | True                                 |
-| ram                        | 256                                  |
-| rxtx_factor                | 1.0                                  |
-| swap                       |                                      |
-| vcpus                      | 1                                    |
-+----------------------------+--------------------------------------+
-```
-
-Now, create the instance.
-
-```
-openstack server create [name-of-instance] --flavor [your-flavor-name]  --image [your-image, probably cirrOS] --nic net-id=public
-
-ex: openstack server create testinstance  --flavor m1.flavor_2  --image  cirros-0.3.5-x86_64-disk  --nic net-id=public
+ex: openstack server create testinstance  --flavor m1.flavor_2  --image  cirros-0.3.5-x86_64-disk  --nic net-id=public 
+-- availability-zone AZ1
 +-------------------------------------+-----------------------------------------------------------------+
 | Field                               | Value                                                           |
 +-------------------------------------+-----------------------------------------------------------------+
