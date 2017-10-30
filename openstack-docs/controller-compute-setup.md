@@ -3,6 +3,7 @@
 ### floating ips
 
 **Update 10/29**: Based on a suggestion by James, we're using 192.168.2.0/24 for our subnet network address. 
+**Update 10/30**: We are now using availability zones, not host aggregates.
 
 ### local.conf for the controller node
 
@@ -168,13 +169,12 @@ ex: openstack server create testinstance  --flavor m1.flavor_2  --image  cirros-
 ```
 
 
-### further questions & concerns
+## further questions & concerns
 
 1. what are availability zones? how do they relate to host aggregates?
 2. does this randomly put the host on a random machine in the host aggregate? can we control it?
 3. i believe that this is roughly doing the load balancing for us so we might need a simpler way of doing this.
 4. [open stack host aggregate notes](https://docs.openstack.org/nova/pike/user/aggregates.html)
-
 
 ### resources
 * https://docs.openstack.org/nova/pike/user/aggregates.html
