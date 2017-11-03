@@ -1,5 +1,6 @@
 # run this on the controller node
 # must be in devstack/ directory
+# you muast have previously run ". openrc admin admin"
 import subprocess
 import sys
 from helpers import admin
@@ -10,8 +11,9 @@ def createAggregateZone(hostName, azName):
 	ag = "-ag"
 	agName = azName + ag
 	admin()
+	subprocess.call(["nova", "aggregate-delete", agName])
 	subprocess.call(["nova","aggregate-create", agName, azName])
-	subprocess.call(["nova", "aggreagte-add-host", agName, hostName])
+	subprocess.call(["nova", "aggregate-add-host", agName, hostName])
 	subprocess.call(["nova", "availability-zone-list"])
 
 
