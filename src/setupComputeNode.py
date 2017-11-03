@@ -10,7 +10,6 @@ from helpers import admin
 def createAggregateZone(hostName, azName):
 	ag = "-ag"
 	agName = azName + ag
-	admin()
 	subprocess.call(["nova", "aggregate-delete", agName])
 	subprocess.call(["nova","aggregate-create", agName, azName])
 	subprocess.call(["nova", "aggregate-add-host", agName, hostName])
