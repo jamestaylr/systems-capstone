@@ -3,7 +3,6 @@
 # you muast have previously run ". openrc admin admin"
 import subprocess
 import sys
-from helpers import admin
 
 
 # can we use az names or just numbers?

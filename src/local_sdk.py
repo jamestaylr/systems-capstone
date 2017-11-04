@@ -1,6 +1,6 @@
 
 from openstack import connection
-
+import time
 #create a connection object for the given cloud - devstack (found in clouds.yaml)
 conn = connection.from_config(cloud_name='devstack')
 
@@ -8,10 +8,18 @@ conn = connection.from_config(cloud_name='devstack')
 fid = '1'
 
 #image id (cirros)
-iid = '20f69164-a011-4454-8eea-c1dd6ea5b181'
+for image in conn.compute.images():
+	iid = image.id
 #create instance 1
 instance1 = conn.compute.create_server(name='instance1', flavor_id=fid, image_id=iid)
 
-print(instance1)
+#create instane 2
+instance2 = conn.compute.create_server(name='instance2', flavor_id=fid, image_id=iid, availability_zone='az-capstone4')
 
-conn.compute.delete_server(instance1)
+print(instance1)
+print(instance2)
+
+#conn.compute.delete_server(instance1)
+#conn.compute.delete_server(instance2)
+
+time.sleep(1000)
