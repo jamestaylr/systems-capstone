@@ -1,0 +1,20 @@
+[[local|localrc]]
+
+ADMIN_PASSWORD=maxinet
+DATABASE_PASSWORD=maxinet
+RABBIT_PASSWORD=maxinet
+SERVICE_PASSWORD=$ADMIN_PASSWORD
+
+HOST_IP=192.168.0.221                   # this is CONTROLLER ip
+
+LOGFILE=$DEST/logs/stack.sh.log
+LOGDAYS=2
+
+SWIFT_HASH=66a3d6b56c1f479c8b4e70ab5c2000f5
+SWIFT_REPLICAS=1
+SWIFT_DATA_DIR=$DEST/data
+
+FLOATING_RANGE=192.168.2.0/24           # important! need to have enough floating ips 
+
+FLAT_INTERFACE=enp2s0                   # how we connect to internet
+MULTI_HOST=1                            # turn on multi host

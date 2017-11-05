@@ -1,12 +1,9 @@
 [[local|localrc]]
-
-# DEPRECATED, SEE SRC/LOCAL-CONFIGS
-
-HOST_IP=192.168.0.223 # CHANGE this per compute node
+HOST_IP=192.168.0.219                               # CHANGE this per compute node
 FLAT_INTERFACE=enp2s0
 FIXED_RANGE=10.4.128.0/20
-FIXED_NETWORK_SIZE=4096
-FLOATING_RANGE=192.168.2.0/24
+FIXED_NETWORK_SIZE=4096 
+FLOATING_RANGE=192.168.2.0/24                       # not sure if you need to change this
 MULTI_HOST=1
 LOGFILE=/opt/stack/logs/stack.sh.log
 ADMIN_PASSWORD=maxinet
@@ -14,7 +11,7 @@ DATABASE_PASSWORD=maxinet
 RABBIT_PASSWORD=maxinet
 SERVICE_PASSWORD=maxinet
 DATABASE_TYPE=mysql
-SERVICE_HOST=192.168.0.221 # ** CHANGE of our controller node
+SERVICE_HOST=192.168.0.221                          # CHANGE to ip of controller node
 MYSQL_HOST=$SERVICE_HOST
 RABBIT_HOST=$SERVICE_HOST
 GLANCE_HOSTPORT=$SERVICE_HOST:9292
@@ -23,4 +20,3 @@ NOVA_VNC_ENABLED=True
 NOVNCPROXY_URL="http://$SERVICE_HOST:6080/vnc_auto.html"
 VNCSERVER_LISTEN=$HOST_IP
 VNCSERVER_PROXYCLIENT_ADDRESS=$VNCSERVER_LISTEN
-enable_plugin shade git://git.openstack.org/openstack-infra/shade

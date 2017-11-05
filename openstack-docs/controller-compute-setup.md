@@ -6,9 +6,11 @@
 
 **Update 10/30**: We are now using availability zones, not host aggregates.
 
-### SEE SRC/LOCAL_CONFIGS FOR MOST RECENT CONFIG FILES
+### SEE COMPUTE_LOCAL_CONF and CONTROLLER_LOCAL_CONF FILES FOR MOST RECENT CONFIG FILES
 
 ### local.conf for the controller node
+
+This code is also linked to [here](https://github.com/jamestaylr/systems-capstone/blob/master/openstack-docs/controller_local_conf).
 
 ```
 [[local|localrc]]
@@ -36,7 +38,7 @@ MULTI_HOST=1                            #turn on multi host
 
 ### local.conf for the compute node
 
-This code is also linked to [here](https://github.com/jamestaylr/systems-capstone/blob/master/openstack-docs/compute-node-local-conf).
+This code is also linked to [here](https://github.com/jamestaylr/systems-capstone/blob/master/openstack-docs/compute_local_conf).
 
 ```
 [[local|localrc]]
