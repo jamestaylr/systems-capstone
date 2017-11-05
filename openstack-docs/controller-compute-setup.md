@@ -6,6 +6,8 @@
 
 **Update 10/30**: We are now using availability zones, not host aggregates.
 
+### SEE SRC/LOCAL_CONFIGS FOR MOST RECENT CONFIG FILES
+
 ### local.conf for the controller node
 
 ```
