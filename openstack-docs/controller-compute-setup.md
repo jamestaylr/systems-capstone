@@ -3,6 +3,7 @@
 ### floating ips
 
 **Update 10/29**: Based on a suggestion by James, we're using 192.168.2.0/24 for our subnet network address. 
+
 **Update 10/30**: We are now using availability zones, not host aggregates.
 
 ### local.conf for the controller node
@@ -24,10 +25,10 @@ SWIFT_HASH=66a3d6b56c1f479c8b4e70ab5c2000f5
 SWIFT_REPLICAS=1
 SWIFT_DATA_DIR=$DEST/data
 
-FLOATING_RANGE=192.168.2.0/24  #not sure how much this matters
+FLOATING_RANGE=192.168.2.0/24           #important! need to have enough floating ips 
 
-FLAT_INTERFACE=enp2s0    #how we connect to internet
-MULTI_HOST=1                      #turn on multi host
+FLAT_INTERFACE=enp2s0                   #how we connect to internet
+MULTI_HOST=1                            #turn on multi host
 ```
 
 
@@ -37,7 +38,7 @@ This code is also linked to [here](https://github.com/jamestaylr/systems-capston
 
 ```
 [[local|localrc]]
-HOST_IP=192.168.0.223                               # CHANGE this per compute node
+HOST_IP=192.168.0.223                              # CHANGE this per compute node
 FLAT_INTERFACE=enp2s0
 FIXED_RANGE=10.4.128.0/20
 FIXED_NETWORK_SIZE=4096
@@ -49,7 +50,7 @@ DATABASE_PASSWORD=maxinet
 RABBIT_PASSWORD=maxinet
 SERVICE_PASSWORD=maxinet
 DATABASE_TYPE=mysql
-SERVICE_HOST=192.168.0.221                           # CHANGE to ip of controller node
+SERVICE_HOST=192.168.0.221                         # CHANGE to ip of controller node
 MYSQL_HOST=$SERVICE_HOST
 RABBIT_HOST=$SERVICE_HOST
 GLANCE_HOSTPORT=$SERVICE_HOST:9292
@@ -62,7 +63,7 @@ VNCSERVER_PROXYCLIENT_ADDRESS=$VNCSERVER_LISTEN
 
 ### getting set up
 
-Run ./stack.sh on the controller and any compute nodes.
+Run `./stack.sh` on the controller and any compute nodes.
 
 On the controller node:
 ```
@@ -81,7 +82,7 @@ Validate that all of the compute nodes show up. Expected output is similar to:
 ```
 
 I **believe** but cannot verify that in order to do this next part, the controller network must 
-have a "public" network with a working subnet and some floating IPs. I don't know how to actually set them up (maybe James can supplement?).
+have a "public" network with a working subnet and some floating IPs. Floating IPs can be allocated through the dashboard, under the network > public > subnets menu. There should be enough if you set FLOATING_RANGE in local.conf like above. 
 You can verify that you have public floating IPs like so:
 
 ```
@@ -95,7 +96,7 @@ Previously, we were using host aggregates to actually assign a VM to one particu
 There are still better ways probably, but this will work. 
 
 ```
-# nova aggregate-create <aggregate name> <AZ name>
+# nova aggregate-create <aggregate name> <availability zone name>
 nova aggregate-create HA1 AZ1
 +----+---------+-------------------+-------+------------------------+
 | Id | Name    | Availability Zone | Hosts | Metadata               |
