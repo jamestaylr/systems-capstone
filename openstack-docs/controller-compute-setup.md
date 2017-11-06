@@ -73,6 +73,7 @@ On the controller node:
 ```
 . openrc admin admin
 nova service-list --binary nova-compute
+./tools/discover_hosts.sh
 ```
 Validate that all of the compute nodes show up. Expected output is similar to:
 ```
