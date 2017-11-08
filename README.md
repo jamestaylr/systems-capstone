@@ -10,3 +10,4 @@ Project links:
 Often used documentation:
 * [Setting up compute/controller nodes](https://github.com/jamestaylr/systems-capstone/blob/master/openstack-docs/controller-compute-setup.md)
 * Jun's notes on [compute and controller nodes](https://docs.google.com/document/d/1CQ5WoX6huVVCcsP5OZli07QpCLHAt0bzA2vZTL-INAQ/edit)
+* list of [OpenStack commands](https://docs.openstack.org/python-openstackclient/latest/cli/command-list.html)
