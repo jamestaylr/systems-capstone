@@ -9,7 +9,7 @@ def get_avg(key, rows, number):
         list_of_trait_with_key = [x[3] for x in rows[:number] if key in x]
 	return reduce(lambda x, y: x + y, list_of_trait_with_key) / len(list_of_trait_with_key)
 	
-def get_averages(num_rows):
+def get_averages_from_database(num_rows):
 	# parse config
 	file_name = "/usr/local/dstat/config.toml"
 	with open(file_name, 'rb') as fin:
@@ -22,7 +22,7 @@ def get_averages(num_rows):
 		database = obj['database']
 		username = database['user']
 		password = database['password']
-		host = 'localhost'
+		host = 'capstone2:2180'
 		conn_str = "dbname='stats' user=" + username + " host=" + host + " password=" + password
 		print(conn_str)
 		conn = psycopg2.connect(conn_str)
@@ -47,4 +47,7 @@ def get_averages(num_rows):
 
 
 num_rows = 100
-print "average over last {} rows: {}".format(num_rows, get_averages(num_rows))
+print "average over last {} rows: {}".format(num_rows, get_averages_from_database(num_rows))
+
+
+
