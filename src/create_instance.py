@@ -97,7 +97,7 @@ def setup_floating(conn, testing_instance):
                                 testing_instance_port = port
                                 print(type(port).name)
                                 testing_instance_floating_ip = unused_floating_ip
-                                conn.network.add_ip_to_port(testing_instance_port, testing_instance_floating_ip)
+                                setattr(testing_instance_floating_ip, 'port_id', testing_instance_port.id)
 
 #create a connection object for the given cloud - devstack (found in clouds.yaml)
 # so we're creating with user admin
