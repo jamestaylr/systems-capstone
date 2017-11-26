@@ -88,6 +88,12 @@ Validate that all of the compute nodes show up. Expected output is similar to:
 
 I **believe** but cannot verify that in order to do this next part, the controller network must 
 have a "public" network with a working subnet and some floating IPs. Floating IPs can be allocated through the dashboard, under the network > public > subnets menu. There should be enough if you set FLOATING_RANGE in local.conf like above. 
+
+Or you can create them through the command line: (I think this performs the same function?)
+```
+openstack floating ip create public
+``` 
+
 You can verify that you have public floating IPs like so:
 
 ```
