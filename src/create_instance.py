@@ -63,6 +63,65 @@ def create_sec_group(conn):
 		print(security_group)
 	return all_in_one_security_group
 
+
+
+def create_keypair(conn):
+        keypair = conn.compute.find_keypair(KEYPAIR_NAME)
+        keypair_exists = False
+        for keypair in conn.compute.keypairs():
+                if keypair.name == KEYPAIR_NAME:
+                        keypair_exists = True
+
+        if keypair_exists:
+                print('Keypair ' + KEYPAIR_NAME + ' already exists. Skipping import.')
+                return keypair
+
+        else:
+                print('adding keypair...')
+        pub_key_file = open(os.path.expanduser(PRIVATE_KEYPAIR_FILE)).read()
+        keypair_args = {
+            "name": KEYPAIR_NAME,
+            "public_key": pub_key_file
+         }
+        keypair = conn.compute.create_keypair(**keypair_args)
+
+        return keypair
+
+def create_sec_group(conn):
+        print('Checking for existing security group...')
+        security_group_name = 'all-in-one'
+        security_group_exists = False
+        for security_group in conn.network.security_groups():
+            if security_group.name == security_group_name:
+                all_in_one_security_group = security_group
+                security_group_exists = True
+
+        if security_group_exists:
+                print('Security Group ' + all_in_one_security_group.name + ' already exists. Skipping creation.')
+                return all_in_one_security_group
+        security_group_args = {
+                'name' : security_group_name,
+                'description': 'network access for all-in-one application.'
+        }
+        all_in_one_security_group = conn.network.create_security_group(**security_group_args)
+
+        security_rule_args = {
+                'security_group_id': all_in_one_security_group,
+                'direction': 'ingress',
+                'protocol': 'tcp',
+                'port_range_min': '80',
+                'port_range_max': '80'
+        }
+        conn.network.create_security_group_rule(**security_rule_args)
+
+        security_rule_args['port_range_min'] = '22'
+        security_rule_args['port_range_max'] = '22'
+        conn.network.create_security_group_rule(**security_rule_args)
+
+        for security_group in conn.network.security_groups():
+                print(security_group)
+        return all_in_one_security_group
+
 def setup_floating(conn, testing_instance):
         print('Checking if Floating IP is already assigned to testing_instance...')
         testing_instance_floating_ip = None
@@ -77,7 +136,6 @@ def setup_floating(conn, testing_instance):
                 for floating_ip in conn.network.ips():
                         if not floating_ip.fixed_ip_address:
                                 unused_floating_ip = floating_ip
-				print("found floating ip, it will be : " + str(unused_floating_ip))
                                 break
         if not testing_instance_floating_ip and not unused_floating_ip:
                 print('No free unused Floating IPs. Allocating new Floating IP...')
@@ -130,7 +188,7 @@ fid = '42'
 
 #image id (cirros)
 for image in conn.compute.images():
-	iid = image.id
+        iid = image.id
 
 #security group
 security_group_name = "default"
