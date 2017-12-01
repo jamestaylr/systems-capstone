@@ -86,19 +86,6 @@ Validate that all of the compute nodes show up. Expected output is similar to:
 
 ```
 
-I **believe** but cannot verify that in order to do this next part, the controller network must 
-have a "public" network with a working subnet and some floating IPs. Floating IPs can be allocated through the dashboard, under the network > public > subnets menu. There should be enough if you set FLOATING_RANGE in local.conf like above. 
-
-Or you can create them through the command line: (I think this performs the same function?)
-```
-openstack floating ip create public
-``` 
-
-You can verify that you have public floating IPs like so:
-
-```
-[controller node] openstack floating ip list --network public
-```
 
 ### creating availability zones
 
@@ -139,9 +126,9 @@ Host node-27 has been successfully added for aggregate 7
 Now, create the instance. It will be automatically added to one of the nodes that's part of our availibility zones. 
 
 ```
-openstack server create [name-of-instance] --flavor [your-flavor-name]  --image [your-image, probably cirrOS] --nic net-id=public --availability-zone [your-az-name]
+openstack server create [name-of-instance] --flavor [your-flavor-name]  --image [your-image, probably cirrOS] --nic net-id=private --availability-zone [your-az-name]
 
-ex: openstack server create testinstance  --flavor m1.flavor_2  --image  cirros-0.3.5-x86_64-disk  --nic net-id=public 
+ex: openstack server create testinstance  --flavor m1.flavor_2  --image  cirros-0.3.5-x86_64-disk  --nic net-id=private 
 -- availability-zone AZ1
 +-------------------------------------+-----------------------------------------------------------------+
 | Field                               | Value                                                           |
