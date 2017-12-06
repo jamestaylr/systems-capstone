@@ -3,6 +3,8 @@ from openstack import connection
 import argparse
 import subprocess
 
+fid = 1
+AZ="mainag"
 KEYPAIR_NAME = "demo"
 PRIVATE_KEYPAIR_FILE = "~/devstack/id_rsa_demo"
 
@@ -183,8 +185,6 @@ for network in conn.network.networks():
 #network is private
 networks=[{"uuid": network_uuid}]
 
-# flavor id
-fid = '42'
 
 #image id (cirros)
 for image in conn.compute.images():
@@ -198,9 +198,9 @@ for security_group in conn.network.security_groups():
 
 #create instance 1
 # auto creates with the availability zone that the node you're running on is currently a part of 
-instance1 = conn.compute.create_server(name=INSTANCENAME, flavor_id=fid, image_id=iid, key_name=KEYPAIR_NAME, networks=networks)
+instance1 = conn.compute.create_server(name=INSTANCENAME, flavor_id=fid, image_id=iid, key_name=KEYPAIR_NAME, networks=networks, availability_zone=AZ)
 instance1 = conn.compute.wait_for_server(instance1)
-conn.compute.add_security_group_to_server(server=instance1, security_group=sec_group)
+#conn.compute.add_security_group_to_server(server=instance1, security_group=sec_group)
 setup_floating(conn, instance1)
 print(instance1)
 
