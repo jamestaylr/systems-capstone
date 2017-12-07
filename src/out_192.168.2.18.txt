@@ -1,0 +1,24 @@
+Warning: Permanently added '192.168.2.18' (RSA) to the list of known hosts.
+./run_forever.sh: line 4: 
+Used for benchmarking nodes.
+Run using nohup via ssh.
+: not found
+./run_forever.sh: line 7: ./stress: not found
+./run_forever.sh: line 7: ./stress: not found
+./run_forever.sh: line 7: ./stress: not found
+./run_forever.sh: line 7: ./stress: not found
+./run_forever.sh: line 7: ./stress: not found
+./run_forever.sh: line 7: ./stress: not found
+./run_forever.sh: line 7: ./stress: not found
+./run_forever.sh: line 7: ./stress: not found
+./run_forever.sh: line 7: ./stress: not found
+./run_forever.sh: line 7: ./stress: not found
+./run_forever.sh: line 7: ./stress: not found
+./run_forever.sh: line 7: ./stress: not found
+./run_forever.sh: line 7: ./stress: not found
+./run_forever.sh: line 7: ./stress: not found
+./run_forever.sh: line 7: ./stress: not found
+./run_forever.sh: line 7: ./stress: not found
+./run_forever.sh: line 7: ./stress: not found
+./run_forever.sh: line 7: ./stress: not found
+packet_write_wait: Connection to 192.168.2.18 port 22: Broken pipe
