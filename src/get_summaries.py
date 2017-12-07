@@ -7,6 +7,8 @@ import psycopg2
 import sys
 import datetime
 import numpy as np
+import matplotlib 
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
 def get_data(hostname):
@@ -61,7 +63,11 @@ def calculate_pressure(data):
 
 def main():
     cap0 = get_data('capstone0')
-    #print(cap0)
-    
+    times  = [data[1] for data in cap0['cpu']]  
+    cpus = [data[3] for data in cap0['cpu']]
+    memories = [data[3] for data in cap0['memory']]
+    disks = [data[3] for data in cap0['disk']]
+    plt.plot(times, cpus)
+    plt.savefig('cap0.png')
 if __name__ == "__main__":
     main()
