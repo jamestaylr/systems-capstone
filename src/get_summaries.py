@@ -61,6 +61,6 @@ def main():
 			metric = [data[3] for data in all_data[t]]
 			plt.plot(times, metric)
 			plt.savefig(host + '_' + t + '.png')
-
+			plt.gcf().clear()
 if __name__ == "__main__":
     main()
