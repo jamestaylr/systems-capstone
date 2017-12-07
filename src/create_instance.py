@@ -3,7 +3,7 @@ from openstack import connection
 import argparse
 import subprocess
 
-fid = 1
+fid = 3
 AZ="mainag"
 KEYPAIR_NAME = "demo"
 PRIVATE_KEYPAIR_FILE = "~/devstack/id_rsa_demo"
