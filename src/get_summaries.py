@@ -49,25 +49,18 @@ def get_data(hostname):
 	
 	return data
 
-def calculate_pressure(data):
-    for host, metrics in data.items():
-        for metric, h in metrics.items():
-            data[host][metric]['pressure'] = h['expected'] / h['constant']
-            logging.info('[{}] Metric {} at {} threshold'.format(
-                host,
-                metric,
-                data[host][metric]['pressure']
-            ))
-    return data
-
 
 def main():
-    cap0 = get_data('capstone0')
-    times  = [data[1] for data in cap0['cpu']]  
-    cpus = [data[3] for data in cap0['cpu']]
-    memories = [data[3] for data in cap0['memory']]
-    disks = [data[3] for data in cap0['disk']]
-    plt.plot(times, cpus)
-    plt.savefig('cap0.png')
+	hosts = ['capstone0', 'capstone1']
+	types = ['cpu', 'memory', 'disk']
+	for host in hosts:
+		all_data = get_data(host)
+		times  = [data[1] for data in all_data[types[0]]]  
+	
+		for t in types:
+			metric = [data[3] for data in all_data[t]]
+			plt.plot(times, metric)
+			plt.savefig(host + '_' + t + '.png')
+
 if __name__ == "__main__":
     main()
