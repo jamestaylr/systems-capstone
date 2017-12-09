@@ -25,6 +25,9 @@ else:
 			6: SwitchNode(6, 1, [3]),
 			7: SwitchNode(7, 1, [3]),
 		}
+        	expr = SwitchExperiment(Cluster(), Topo(), switches, switch=OVSSwitch)
+        	expr.ping_all()
+
 	elif (sys.argv[1] == "mesh"):
                 switches = {
                         1: SwitchNode(1, 0, [2, 3, 4, 5, 6, 7]),
@@ -35,6 +38,9 @@ else:
 			6: SwitchNode(6, 1, [1, 2, 3, 4, 5, 7]),
 			7: SwitchNode(7, 1, [1, 2, 3, 4, 5, 6]),
                 }
+	        expr = SwitchExperiment(Cluster(), Topo(), switches, switch=OVSSwitch)
+	        expr.ping_all()
+
 	elif (sys.argv[1] == "fork"):
                 switches = {
                         1: SwitchNode(1, 0, [2, 3]),
@@ -45,6 +51,8 @@ else:
 			6: SwitchNode(6, 1, [3, 7]),
 			7: SwitchNode(7, 1, [6])
                 }
+	        expr = SwitchExperiment(Cluster(), Topo(), switches, switch=OVSSwitch)
+       		expr.ping_all()
 
 	else: #assume tree
                 switches = {
@@ -56,6 +64,6 @@ else:
 			6: SwitchNode(6, 1, [2]),
 			7: SwitchNode(7, 1, [2])
                 }
-		
-	expr = SwitchExperiment(Cluster(), Topo(), switches, switch=OVSSwitch)
-	expr.ping_all()
+	        expr = SwitchExperiment(Cluster(), Topo(), switches, switch=OVSSwitch)
+	        expr.ping_all()
+
