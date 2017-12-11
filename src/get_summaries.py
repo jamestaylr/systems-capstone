@@ -58,20 +58,25 @@ def main():
 		all_data = get_data(host)
 		times  = [data[1] for data in all_data[types[0]]]  
 		
+		counter = 0
+		fig, axs = plt.subplots(3, 1, sharex=True)
+		fig.autofmt_xdate()
 		for t in types:
 			metric = [data[3] for data in all_data[t]]
 
-			fig, ax = plt.subplots(1)
-			fig.autofmt_xdate()
 			
-			plt.title(host + " " + t)			
-			plt.ylabel(t)
-			plt.xlabel("Hour")
-			plt.plot(times, metric)
-			xfmt = mdates.DateFormatter('%H:%M')
-			ax.xaxis.set_major_formatter(xfmt)
-			plt.savefig(host + '_' + t + '.png')
-			plt.gcf().clear()
+			axs[counter].set_title(host + " " + t)			
+			axs[counter].set_ylabel(t)
+			axs[counter].set_xlabel("Hour")
+			axs[counter].plot(times, metric)
+			xfmt = mdates.DateFormatter('%H')
+			axs[counter].xaxis.set_major_formatter(xfmt)
+			counter += 1
+
+		plt.tight_layout()
+		plt.title(host)
+		plt.savefig(host + '.png')
+		plt.gcf().clear()
 
 
 if __name__ == "__main__":
