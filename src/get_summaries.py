@@ -10,6 +10,8 @@ import numpy as np
 import matplotlib 
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
+import matplotlib.dates as mdates
+
 
 def get_data(hostname):
 	# parse config
@@ -46,7 +48,6 @@ def get_data(hostname):
 		cur.execute(query)
 		rows = cur.fetchall()
 		data[t] = rows
-	
 	return data
 
 
@@ -59,8 +60,18 @@ def main():
 	
 		for t in types:
 			metric = [data[3] for data in all_data[t]]
+
+			fig, ax = plt.subplots(1)
+			fig.autofmt_xdate()
+			
+			plt.ylabel(t)
+			plt.xlabel("Hour")
 			plt.plot(times, metric)
+			xfmt = mdates.DateFormatter('%H:%M')
+			ax.xaxis.set_major_formatter(xfmt)
 			plt.savefig(host + '_' + t + '.png')
 			plt.gcf().clear()
+
+
 if __name__ == "__main__":
     main()
