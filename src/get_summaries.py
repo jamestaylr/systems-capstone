@@ -39,7 +39,6 @@ def get_data(hostname):
 	# get and print rows
 	now = datetime.datetime.now()
 	d = now.strftime("%Y-%m-%d")
-	d = "2017-12-06"	
 	types = ["cpu", "memory", "disk"]
 	data = {}
 	for t in types:
