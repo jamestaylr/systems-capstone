@@ -57,7 +57,7 @@ def main():
 	for host in hosts:
 		all_data = get_data(host)
 		times  = [data[1] for data in all_data[types[0]]]  
-	
+		
 		for t in types:
 			metric = [data[3] for data in all_data[t]]
 
@@ -67,7 +67,7 @@ def main():
 			plt.ylabel(t)
 			plt.xlabel("Hour")
 			plt.plot(times, metric)
-			xfmt = mdates.DateFormatter('%d - %H:%M')
+			xfmt = mdates.DateFormatter('%H:%M')
 			ax.xaxis.set_major_formatter(xfmt)
 			plt.savefig(host + '_' + t + '.png')
 			plt.gcf().clear()
