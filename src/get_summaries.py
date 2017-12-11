@@ -52,7 +52,7 @@ def get_data(hostname):
 
 
 def main():
-	hosts = ['capstone0', 'capstone1']
+	hosts = ['capstone0', 'capstone1', 'capstone2']
 	types = ['cpu', 'memory', 'disk']
 	for host in hosts:
 		all_data = get_data(host)
@@ -67,7 +67,7 @@ def main():
 			plt.ylabel(t)
 			plt.xlabel("Hour")
 			plt.plot(times, metric)
-			xfmt = mdates.DateFormatter('%H:%M')
+			xfmt = mdates.DateFormatter('%d - %H:%M')
 			ax.xaxis.set_major_formatter(xfmt)
 			plt.savefig(host + '_' + t + '.png')
 			plt.gcf().clear()
