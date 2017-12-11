@@ -64,6 +64,7 @@ def main():
 			fig, ax = plt.subplots(1)
 			fig.autofmt_xdate()
 			
+			plt.title(host + " " + t)			
 			plt.ylabel(t)
 			plt.xlabel("Hour")
 			plt.plot(times, metric)
