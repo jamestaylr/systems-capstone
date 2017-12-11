@@ -50,11 +50,11 @@ class SwitchExperiment(Experiment):
                 dest_node._sid,
                 dest_node._ip_addr,
             ))
-            self.expr_node(src_node).cmd('ping -c 5 {}'.format(dest_node._ip_addr))
-            self.expr_node(dest_node).cmd('ping -c 5 {}'.format(src_node._ip_addr))
+            self.expr_node(src_node).cmd('ping -c 1 {}'.format(dest_node._ip_addr))
+            self.expr_node(dest_node).cmd('ping -c 1 {}'.format(src_node._ip_addr))
 
         for i in range(0, len(self._switches)):
-            for srcs in itertools.permutations(self._switches.keys(), i):
+            for srcs in itertools.combinations(self._switches.keys(), i):
                 dests = set(self._switches.keys()) - set(srcs)
                 links = [(s, d) for s, d in self.links \
                         if (s in srcs and d in dests) \
