@@ -1,0 +1,19 @@
+commit 1886617dffe47c125f535337a70d58ed8a4e2436
+Author: James Taylor <jamestaylr@gmail.com>
+Date:   Mon Oct 23 12:32:19 2017 -0400
+
+    Retry pool update on execute resource failure
+
+diff --git a/recipes/common.rb b/recipes/common.rb
+index bfca7c2..43a2a4c 100644
+--- a/recipes/common.rb
++++ b/recipes/common.rb
+@@ -157,6 +157,8 @@ execute 'designate-manage pool update' do
+   user node['openstack']['dns']['user']
+   group node['openstack']['dns']['group']
+   command 'designate-manage pool update'
++  retries 3
++  retry_delay 10
+   action :nothing
+   subscribes :run, 'template[/etc/designate/pools.yaml]'
+ end
